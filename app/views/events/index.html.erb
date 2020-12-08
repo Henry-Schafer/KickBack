@@ -8,61 +8,6 @@
 
 <hr>
 
-<!--
-<div>
-  <div>
-    <h2>
-      Add a new event
-    </h2>
-
-    <form action="/insert_event" method="post">
-      <div>
-        <label for="details_box">
-          Details
-        </label>
-
-        <textarea id="details_box" name="query_details" rows="3"></textarea>
-      </div>
-
-      <div>
-        <input type="checkbox" id="public_status_box" name="query_public_status" value="1">
-
-        <label for="public_status_box">Public status</label>
-      </div>
-
-      <div>
-        <label for="event_name_box">
-          Event name
-        </label>
-
-        <input type="text" id="event_name_box" name="query_event_name">
-      </div>
-
-      <div>
-        <label for="creator_id_box">
-          Creator
-        </label>
-
-        <input type="text" id="creator_id_box" name="query_creator_id">
-      </div>
-
-      <div>
-        <label for="event_date_box">
-          Event date
-        </label>
-
-        <input type="date" id="event_date_box" name="query_event_date">
-      </div>
-
-      <button>
-        Create event
-      </button>
-    </form>
-  </div>
-</div>
--->
-
-<hr>
 <div>
   <div>
     <table>
@@ -112,7 +57,11 @@
         </td>
 
         <td>
+          <%if an_event.public_status%>
+            Hidden
+          <%else%>
           <%= an_event.details %>
+          <%end%>
         </td>
 
         <td>
@@ -128,7 +77,12 @@
         </td>
 
         <td>
-          <%= User.where({ :id => an_event.creator_id }).at(0).username %>
+          <%if an_event.public_status%>
+            Hidden
+          <%else%>
+            <%= User.where({ :id => an_event.creator_id }).at(0).username %>
+          <%end%>
+
         </td>
 
         <td>
