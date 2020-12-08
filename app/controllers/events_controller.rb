@@ -22,7 +22,7 @@ class EventsController < ApplicationController
     the_event.details = params.fetch("query_details")
     the_event.public_status = params.fetch("query_public_status", false)
     the_event.event_name = params.fetch("query_event_name")
-    the_event.creator_id = params.fetch("query_creator_id")
+    the_event.creator_id = @current_user.id # session[:user_id]
     the_event.event_date = params.fetch("query_event_date")
 
     if the_event.valid?

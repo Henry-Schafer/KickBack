@@ -12,11 +12,11 @@
 
 
     <% if the_my_event == nil %>
-      <form action="/insert_my_event" method="post">
-        <input type="hidden" name="query_event_id" value="<%= @the_event.id %>">
+        <form action="/insert_my_event" method="post">
+          <input type="hidden" name="query_event_id" value="<%= @the_event.id %>">
 
-        <button>Join this event</button>
-      </form>
+          <button>Join this event</button>
+        </form>
 
     <% else %>
       <a href="/delete_my_event/<%= the_my_event.id %>">
@@ -62,10 +62,10 @@
       </dd>
 
       <dt>
-        Creator
+        Host
       </dt>
       <dd>
-        <%= @the_event.creator_id %>
+        <%= User.where({ :id => @the_event.creator_id }).at(0).username %>
       </dd>
 
       <dt>

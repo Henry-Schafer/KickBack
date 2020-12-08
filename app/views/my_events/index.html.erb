@@ -1,3 +1,4 @@
+   <% if session[:user_id] != nil %>
 <div>
   <div>
     <h1>
@@ -18,7 +19,11 @@
         </th>
 
         <th>
-          Bookmarked at
+          Date
+        </th>
+
+        <th>
+          Joined
         </th>
         <th>
         </th>
@@ -30,10 +35,12 @@
           <a href="/events/<%= a_bookmark.event_id %>">
             <%= a_bookmark.event.event_name %>
 
-            (<%= a_bookmark.event.event_date %>)
           </a>
         </td>
 
+        <td>
+            <%= a_bookmark.event.event_date %>
+        </td>
         <td>
           <%= time_ago_in_words(a_bookmark.created_at) %> ago
         </td>
@@ -146,3 +153,4 @@
 -->
 
 <hr>
+<%end%>

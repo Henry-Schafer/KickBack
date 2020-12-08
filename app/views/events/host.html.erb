@@ -1,5 +1,6 @@
 <div>
   <div>
+    <% if session[:user_id] != nil %>
     <h2>
       Host a new event
     </h2>
@@ -26,7 +27,7 @@
 
         <input type="text" id="event_name_box" name="query_event_name">
       </div>
-
+<!--
       <div>
         <label for="creator_id_box">
           Creator
@@ -34,7 +35,7 @@
 
         <input type="text" id="creator_id_box" name="query_creator_id">
       </div>
-
+-->
       <div>
         <label for="event_date_box">
           Event date
@@ -47,5 +48,6 @@
         Create event
       </button>
     </form>
+    <%end%>
   </div>
 </div>

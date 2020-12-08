@@ -1,20 +1,24 @@
 class MyEventsController < ApplicationController
   def index
-    matching_my_events = @current_user.my_events
+    if session[:user_id] != nil
+      matching_my_events = @current_user.my_events
 
-    @list_of_my_events = matching_my_events.order({ :created_at => :desc })
+      @list_of_my_events = matching_my_events.order({ :created_at => :desc })
 
-    render({ :template => "my_events/index.html.erb" })
+      render({ :template => "my_events/index.html.erb" })
+    end
   end
 
   def show
-    the_id = params.fetch("path_id")
+    if session[:user_id] != nil
+      the_id = params.fetch("path_id")
 
-    matching_my_events = MyEvent.where({ :id => the_id })
+      matching_my_events = MyEvent.where({ :id => the_id })
 
-    @the_my_event = matching_my_events.at(0)
+      @the_my_event = matching_my_events.at(0)
 
-    render({ :template => "my_events/show.html.erb" })
+      render({ :template => "my_events/show.html.erb" })
+    end
   end
 
   def create

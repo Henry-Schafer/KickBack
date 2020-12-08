@@ -84,7 +84,7 @@
         </th>
 
         <th>
-          Creator
+          Host
         </th>
 
         <th>
@@ -117,9 +117,9 @@
 
         <td>
           <%if an_event.public_status %>
-            Private Event
+            Private 
           <%else%>
-            Public Event
+            Public 
           <%end%>
         </td>
 
@@ -128,7 +128,7 @@
         </td>
 
         <td>
-          <%= an_event.creator_id %>
+          <%= User.where({ :id => an_event.creator_id }).at(0).username %>
         </td>
 
         <td>
