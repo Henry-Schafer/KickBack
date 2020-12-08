@@ -27,6 +27,7 @@
           <th>
           </th>
         </tr>
+        
         <% @list_of_my_events.each do |a_bookmark| %>
            <% if a_bookmark.event.creator_id == @current_user.id %>        
             <tr>
