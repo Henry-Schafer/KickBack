@@ -16,6 +16,60 @@
   </head>
 
   <body>
+  <h1>KICKBACK</h1>
+   <ul>
+      <% if @current_user == nil %>
+        <li>
+          <a href="/user_sign_in">
+            Sign in
+          </a>
+        </li>
+        
+        <li>
+          <a href="/user_sign_up">
+            Sign up
+          </a>
+        </li>
+      <% else %>
+        <li>
+          <a href="/edit_user_profile">
+            My Profile: <%= @current_user.username %>
+          </a>
+        </li>
+        
+        <li>
+          <a href="/user_sign_out">
+            Sign out
+          </a>
+        </li>
+
+        <li>
+          <a href="/my_events">
+            My events
+          </a>
+        </li>
+      <li>
+          <a href="/events">
+            Join an event
+          </a>
+        </li>
+        <li>
+          <a href="/host_events">
+            Host an event
+          </a>
+        </li>
+      </ul>
+
+      <% end %>
+
+    <p style="color: green">
+      <%= notice %>
+    </p>
+
+    <p style="color: red">
+      <%= alert %>
+    </p>
+
     <%= yield %>
   </body>
 </html>

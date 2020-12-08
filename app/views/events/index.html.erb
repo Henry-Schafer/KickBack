@@ -1,0 +1,158 @@
+<div>
+  <div>
+    <h1>
+      List of all events
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<!--
+<div>
+  <div>
+    <h2>
+      Add a new event
+    </h2>
+
+    <form action="/insert_event" method="post">
+      <div>
+        <label for="details_box">
+          Details
+        </label>
+
+        <textarea id="details_box" name="query_details" rows="3"></textarea>
+      </div>
+
+      <div>
+        <input type="checkbox" id="public_status_box" name="query_public_status" value="1">
+
+        <label for="public_status_box">Public status</label>
+      </div>
+
+      <div>
+        <label for="event_name_box">
+          Event name
+        </label>
+
+        <input type="text" id="event_name_box" name="query_event_name">
+      </div>
+
+      <div>
+        <label for="creator_id_box">
+          Creator
+        </label>
+
+        <input type="text" id="creator_id_box" name="query_creator_id">
+      </div>
+
+      <div>
+        <label for="event_date_box">
+          Event date
+        </label>
+
+        <input type="date" id="event_date_box" name="query_event_date">
+      </div>
+
+      <button>
+        Create event
+      </button>
+    </form>
+  </div>
+</div>
+-->
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Details
+        </th>
+
+        <th>
+          Party Type
+        </th>
+
+        <th>
+          Event name
+        </th>
+
+        <th>
+          Creator
+        </th>
+
+        <th>
+          Event date
+        </th>
+
+        <!--
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+        -->
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_events.each do |an_event| %>
+      <tr>
+        <td>
+          <%= an_event.id %>
+        </td>
+
+        <td>
+          <%= an_event.details %>
+        </td>
+
+        <td>
+          <%if an_event.public_status %>
+            Private Event
+          <%else%>
+            Public Event
+          <%end%>
+        </td>
+
+        <td>
+          <%= an_event.event_name %>
+        </td>
+
+        <td>
+          <%= an_event.creator_id %>
+        </td>
+
+        <td>
+          <%= an_event.event_date %>
+        </td>
+
+         <!--
+        <td>
+          <%= time_ago_in_words(an_event.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_event.updated_at) %> ago
+        </td>
+        -->
+
+        <td>
+          <a href="/events/<%= an_event.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

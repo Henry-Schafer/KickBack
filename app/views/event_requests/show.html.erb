@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Event request #<%= @the_event_request.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/event_requests">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_event_request/<%= @the_event_request.id %>">
+          Delete event request
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Status
+      </dt>
+      <dd>
+        <%= @the_event_request.status %>
+      </dd>
+
+      <dt>
+        Sender
+      </dt>
+      <dd>
+        <%= @the_event_request.sender_id %>
+      </dd>
+
+      <dt>
+        Owner
+      </dt>
+      <dd>
+        <%= @the_event_request.owner_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_event_request.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_event_request.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit event request
+    </h2>
+
+    <form action="/modify_event_request/<%= @the_event_request.id %>"  method="post" >
+      <div>
+        <label for="status_box">
+          Status
+        </label>
+
+        <input type="text" id="status_box" name="query_status" value="<%= @the_event_request.status %>">
+      </div>
+
+      <div>
+        <label for="sender_id_box">
+          Sender
+        </label>
+
+        <input type="text" id="sender_id_box" name="query_sender_id" value="<%= @the_event_request.sender_id %>">
+      </div>
+
+      <div>
+        <label for="owner_id_box">
+          Owner
+        </label>
+
+        <input type="text" id="owner_id_box" name="query_owner_id" value="<%= @the_event_request.owner_id %>">
+      </div>
+
+      <button>
+        Update event request
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

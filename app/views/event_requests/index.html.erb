@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      List of all event requests
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new event request
+    </h2>
+
+    <form action="/insert_event_request" method="post">
+      <div>
+        <label for="status_box">
+          Status
+        </label>
+
+        <input type="text" id="status_box" name="query_status">
+      </div>
+
+      <div>
+        <label for="sender_id_box">
+          Sender
+        </label>
+
+        <input type="text" id="sender_id_box" name="query_sender_id">
+      </div>
+
+      <div>
+        <label for="owner_id_box">
+          Owner
+        </label>
+
+        <input type="text" id="owner_id_box" name="query_owner_id">
+      </div>
+
+      <button>
+        Create event request
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Status
+        </th>
+
+        <th>
+          Sender
+        </th>
+
+        <th>
+          Owner
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_event_requests.each do |an_event_request| %>
+      <tr>
+        <td>
+          <%= an_event_request.id %>
+        </td>
+
+        <td>
+          <%= an_event_request.status %>
+        </td>
+
+        <td>
+          <%= an_event_request.sender_id %>
+        </td>
+
+        <td>
+          <%= an_event_request.owner_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_event_request.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_event_request.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/event_requests/<%= an_event_request.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

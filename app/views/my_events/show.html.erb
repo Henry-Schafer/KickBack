@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      My event #<%= @the_my_event.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/my_events">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_my_event/<%= @the_my_event.id %>">
+          Delete my event
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_my_event.user_id %>
+      </dd>
+
+      <dt>
+        Event
+      </dt>
+      <dd>
+        <%= @the_my_event.event_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_my_event.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_my_event.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit my event
+    </h2>
+
+    <form action="/modify_my_event/<%= @the_my_event.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_my_event.user_id %>">
+      </div>
+
+      <div>
+        <label for="event_id_box">
+          Event
+        </label>
+
+        <input type="text" id="event_id_box" name="query_event_id" value="<%= @the_my_event.event_id %>">
+      </div>
+
+      <button>
+        Update my event
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

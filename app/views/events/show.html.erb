@@ -1,0 +1,153 @@
+<div>
+  <div>
+    <h1>
+      Event #<%= @the_event.id %> details
+    </h1>
+
+    
+    <% if session[:user_id] != nil %>
+    <% matching_my_events = MyEvent.where({ :user_id => @current_user.id }).where({ :event_id => @the_event.id }) %> 
+
+    <% the_my_event = matching_my_events.at(0) %>
+
+
+    <% if the_my_event == nil %>
+      <form action="/insert_my_event" method="post">
+        <input type="hidden" name="query_event_id" value="<%= @the_event.id %>">
+
+        <button>Join this event</button>
+      </form>
+
+    <% else %>
+      <a href="/delete_my_event/<%= the_my_event.id %>">
+        Un-bookmark
+      </a>
+    <% end %>
+     <% end %>
+
+    <div>
+      <div>
+        <a href="/events">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_event/<%= @the_event.id %>">
+          Delete event
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Details
+      </dt>
+      <dd>
+        <%= @the_event.details %>
+      </dd>
+
+      <dt>
+        Public status
+      </dt>
+      <dd>
+        <%= @the_event.public_status %>
+      </dd>
+
+      <dt>
+        Event name
+      </dt>
+      <dd>
+        <%= @the_event.event_name %>
+      </dd>
+
+      <dt>
+        Creator
+      </dt>
+      <dd>
+        <%= @the_event.creator_id %>
+      </dd>
+
+      <dt>
+        Event date
+      </dt>
+      <dd>
+        <%= @the_event.event_date %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_event.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_event.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+<!--
+<div>
+  <div>
+    <h2>
+      Edit event
+    </h2>
+
+    <form action="/modify_event/<%= @the_event.id %>"  method="post" >
+      <div>
+        <label for="details_box">
+          Details
+        </label>
+
+        <textarea id="details_box" name="query_details"><%= @the_event.details %></textarea>
+      </div>
+
+      <div>
+        <input type="checkbox" id="public_status_box" name="query_public_status" value="1" <%= "checked" if @the_event.public_status %>>
+
+        <label for="public_status_box">
+            Public status
+        </label>
+      </div>
+
+      <div>
+        <label for="event_name_box">
+          Event name
+        </label>
+
+        <input type="text" id="event_name_box" name="query_event_name" value="<%= @the_event.event_name %>">
+      </div>
+
+      <div>
+        <label for="creator_id_box">
+          Creator
+        </label>
+
+        <input type="text" id="creator_id_box" name="query_creator_id" value="<%= @the_event.creator_id %>">
+      </div>
+
+      <div>
+        <label for="event_date_box">
+          Event date
+        </label>
+
+        <input type="date" id="event_date_box" name="query_event_date" value="<%= @the_event.event_date %>">
+      </div>
+
+      <button>
+        Update event
+      </button>
+    </form>
+  </div>
+</div>
+-->
+
+
