@@ -36,15 +36,6 @@
           Event date
         </th>
 
-        <!--
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-        -->
 
         <th>
         </th>
@@ -56,6 +47,11 @@
           <%= an_event.id %>
         </td>
 
+
+        <td>
+        <%= an_event.details %>
+        </td>
+<!--
         <td>
           <%if an_event.public_status%>
             Hidden
@@ -63,7 +59,7 @@
           <%= an_event.details %>
           <%end%>
         </td>
-
+-->
         <td>
           <%if an_event.public_status %>
             Private 
@@ -77,13 +73,17 @@
         </td>
 
         <td>
+          <%= User.where({ :id => an_event.creator_id }).at(0).username %>
+        </td>
+
+        <!--
           <%if an_event.public_status%>
             Hidden
           <%else%>
             <%= User.where({ :id => an_event.creator_id }).at(0).username %>
           <%end%>
-
-        </td>
+        -->
+        
 
         <td>
           <%= an_event.event_date %>

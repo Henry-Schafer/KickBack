@@ -8,7 +8,7 @@ task({ :sample_data => :environment}) do
   EventRequest.destroy_all
 
 
-10.times do |count|
+5.times do |count|
     user = User.new
     user.email = Faker::Internet.email 
     user.username = Faker::Name.name 
@@ -19,23 +19,24 @@ task({ :sample_data => :environment}) do
 users = User.all
 bool = [true, false]
 
- 20.times do |count|
+ 50.times do |count|
     event = Event.new
     event.event_name = Faker::Team.sport 
-    event.details = Faker::Marketing.buzzwords 
+    event.details = Faker::Address.community 
     event.public_status = bool.sample
     event.event_date = Faker::Date.forward(days: 23)
     event.creator_id = users.sample.id
-    event.save 
+    event.save
  end
 
  events= Event.all
 
- 10.times do |count|
+ events.each do |event|
     my_event = MyEvent.new
-    my_event.event_id = events.sample.id
-    my_event.user_id = users.sample.id 
+    my_event.event_id = event.id
+    my_event.user_id = event.creator_id 
     my_event.save 
  end
+
 
 end
