@@ -33,11 +33,11 @@
             <tr>
               <td>
                 <a href="/events/<%= a_bookmark.event_id %>">
-                  <%= a_bookmark.id %>
+                  <%= a_bookmark.event.event_name %>
                 </a>
               </td>
               <td>
-                <%= a_bookmark.event_id %>
+                <%= a_bookmark.event.event_date %>
               </td>
               <td>
                 <%= time_ago_in_words(a_bookmark.created_at) %> ago
@@ -86,11 +86,11 @@
             <tr>
               <td>
                 <a href="/events/<%= a_bookmark.event_id %>">
-                  <%= a_bookmark.id %>
+                  <%= a_bookmark.event.event_name %>
                 </a>
               </td>
               <td>
-                <%= a_bookmark.event_id %>
+                <%= a_bookmark.event.event_date %>
               </td>
               <td>
                 <%= time_ago_in_words(a_bookmark.created_at) %> ago

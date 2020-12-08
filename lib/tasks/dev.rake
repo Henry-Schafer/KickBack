@@ -29,4 +29,13 @@ bool = [true, false]
     event.save 
  end
 
+ events= Event.all
+
+ 10.times do |count|
+    my_event = MyEvent.new
+    my_event.event_id = events.sample.id
+    my_event.user_id = users.sample.id 
+    my_event.save 
+ end
+
 end
