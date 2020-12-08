@@ -3,42 +3,36 @@
     <h1>
       Event #<%= @the_event.id %> details
     </h1>
-
-    
     <% if session[:user_id] != nil %>
-    <% matching_my_events = MyEvent.where({ :user_id => @current_user.id }).where({ :event_id => @the_event.id }) %> 
-
-    <% the_my_event = matching_my_events.at(0) %>
-
-
-    <% if the_my_event == nil %>
+      <% matching_my_events = MyEvent.where({ :user_id => @current_user.id }).where({ :event_id => @the_event.id }) %>
+      <% the_my_event = matching_my_events.at(0) %>
+      <% if the_my_event == nil %>
         <form action="/insert_my_event" method="post">
           <input type="hidden" name="query_event_id" value="<%= @the_event.id %>">
-
           <button>Join this event</button>
         </form>
-
-    <% else %>
-      <a href="/delete_my_event/<%= the_my_event.id %>">
-        Un-bookmark
-      </a>
+      <% else %>
+        <% if @the_event.creator_id != @current_user.id %>
+          <a href="/delete_my_event/<%= the_my_event.id %>">
+            Leave event
+          </a>
+        <% end %>
+      <% end %>
     <% end %>
-     <% end %>
-
     <div>
       <div>
         <a href="/events">
           Go back
         </a>
       </div>
-
-      <div>
-        <a href="/delete_event/<%= @the_event.id %>">
-          Delete event
-        </a>
-      </div>
+      <% if @the_event.creator_id == @current_user.id %>
+        <div>
+          <a href="/delete_event/<%= @the_event.id %>">
+            Delete event
+          </a>
+        </div>
+      <% end %>
     </div>
-
     <dl>
       <dt>
         Details
@@ -46,42 +40,36 @@
       <dd>
         <%= @the_event.details %>
       </dd>
-
       <dt>
         Public status
       </dt>
       <dd>
         <%= @the_event.public_status %>
       </dd>
-
       <dt>
         Event name
       </dt>
       <dd>
         <%= @the_event.event_name %>
       </dd>
-
       <dt>
         Host
       </dt>
       <dd>
         <%= User.where({ :id => @the_event.creator_id }).at(0).username %>
       </dd>
-
       <dt>
         Event date
       </dt>
       <dd>
         <%= @the_event.event_date %>
       </dd>
-
       <dt>
         Created at
       </dt>
       <dd>
         <%= time_ago_in_words(@the_event.created_at) %> ago
       </dd>
-
       <dt>
         Updated at
       </dt>
@@ -91,10 +79,9 @@
     </dl>
   </div>
 </div>
-
 <hr>
 
-<!--
+ <% if @the_event.creator_id == @current_user.id %>
 <div>
   <div>
     <h2>
@@ -148,6 +135,4 @@
     </form>
   </div>
 </div>
--->
-
-
+<%end%>

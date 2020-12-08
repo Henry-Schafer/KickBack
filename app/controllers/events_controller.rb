@@ -30,11 +30,10 @@ class EventsController < ApplicationController
     if the_event.valid?
       the_event.save
 
-
         if the_event.creator_id == @current_user.id
-      the_my_event = MyEvent.new
-      the_my_event.user_id = @current_user.id # session[:user_id]
-      the_my_event.event_id = the_event.id
+          the_my_event = MyEvent.new
+          the_my_event.user_id = @current_user.id # session[:user_id]
+          the_my_event.event_id = the_event.id
         if the_my_event.valid?
           the_my_event.save
         end

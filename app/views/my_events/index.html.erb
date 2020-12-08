@@ -1,189 +1,108 @@
    <% if session[:user_id] != nil %>
-<div>
+   
   <div>
-    <h1>
-      Host to events
-    </h1>
+    <div>
+      <h1>
+        Host to events
+      </h1>
+    </div>
   </div>
-</div>
 
-<hr>
+  <hr>
+  <hr>
 
-<hr>
-<div>
   <div>
-    <table>
-      <tr>
-        <th>
-          Event
-        </th>
-
-        <th>
-          Date
-        </th>
-
-        <th>
-          Joined
-        </th>
-        <th>
-        </th>
-      </tr>
-    
-      <% @list_of_my_events.each do |a_bookmark| %>
-      <% if a_bookmark.event.creator_id == @current_user.id %>
-      <tr>
-        <td>
-          <a href="/events/<%= a_bookmark.event_id %>">
-            <%= a_bookmark.id %>
-
-          </a>
-        </td>
-
-        <td>
-          <%= a_bookmark.event_id %>
-        </td>
-        <td>
-          <%= time_ago_in_words(a_bookmark.created_at) %> ago
-        </td>
-
-        <td>
-          <a href="/delete_my_event/<%= a_bookmark.id %>">
-             Leave Event    
-          </a>
-        </td>
-      </tr>
-       <%end%>
-      <% end %>
-    </table>
+    <div>
+      <table>
+        <tr>
+          <th>
+            Event
+          </th>
+          <th>
+            Date
+          </th>
+          <th>
+            Joined
+          </th>
+          <th>
+          </th>
+        </tr>
+        <% @list_of_my_events.each do |a_bookmark| %>
+           <% if a_bookmark.event.creator_id == @current_user.id %>        
+            <tr>
+              <td>
+                <a href="/events/<%= a_bookmark.event_id %>">
+                  <%= a_bookmark.id %>
+                </a>
+              </td>
+              <td>
+                <%= a_bookmark.event_id %>
+              </td>
+              <td>
+                <%= time_ago_in_words(a_bookmark.created_at) %> ago
+              </td>
+              <td>
+                <a href="/delete_my_event/<%= a_bookmark.id %>">
+                  Leave Event    
+                </a>
+              </td>
+            </tr>
+           <%end%>
+        <% end %>
+      </table>
+    </div>
   </div>
-</div>
 
-<hr>
+  <hr>
 
-<div>
   <div>
-    <h1>
-      Guest to events
-    </h1>
+    <div>
+      <h1>
+        Guest to events
+      </h1>
+    </div>
   </div>
-</div>
-
-<hr>
-
-<hr>
-<div>
+  <hr>
+  <hr>
   <div>
-    <table>
-      <tr>
-        <th>
-          Event
-        </th>
-
-        <th>
-          Date
-        </th>
-
-        <th>
-          Joined
-        </th>
-        <th>
-        </th>
-      </tr>
-    
-      <% @list_of_my_events.each do |a_bookmark| %>
-      <% if a_bookmark.event.creator_id != @current_user.id %>
-      <tr>
-        <td>
-          <a href="/events/<%= a_bookmark.event_id %>">
-            <%= a_bookmark.id %>
-
-          </a>
-        </td>
-
-        <td>
-          <%= a_bookmark.event_id %>
-        </td>
-        <td>
-          <%= time_ago_in_words(a_bookmark.created_at) %> ago
-        </td>
-
-        <td>
-          <a href="/delete_my_event/<%= a_bookmark.id %>">
-             Leave Event    
-          </a>
-        </td>
-      </tr>
-       <%end%>
-      <% end %>
-    </table>
-  </div>
-</div>
-
-<hr>
-
-
-<!--
-<hr>
-<div>
-  <div>
-    <table>
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          User
-        </th>
-
-        <th>
-          Event
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @list_of_my_events.each do |a_my_event| %>
-      <tr>
-        <td>
-          <%= a_my_event.id %>
-        </td>
-
-        <td>
-          <%= a_my_event.user_id %>
-        </td>
-
-        <td>
-          <%= a_my_event.event_id %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_my_event.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_my_event.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/my_events/<%= a_my_event.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
--->
-
-<hr>
-<%end%>
+    <div>
+      <table>
+        <tr>
+          <th>
+            Event
+          </th>
+          <th>
+            Date
+          </th>
+          <th>
+            Joined
+          </th>
+          <th>
+          </th>
+        </tr>
+        <% @list_of_my_events.each do |a_bookmark| %>
+          <% if a_bookmark.event.creator_id != @current_user.id %>
+            <tr>
+              <td>
+                <a href="/events/<%= a_bookmark.event_id %>">
+                  <%= a_bookmark.id %>
+                </a>
+              </td>
+              <td>
+                <%= a_bookmark.event_id %>
+              </td>
+              <td>
+                <%= time_ago_in_words(a_bookmark.created_at) %> ago
+              </td>
+              <td>
+                <a href="/delete_my_event/<%= a_bookmark.id %>">
+                  Leave Event    
+                </a>
+              </td>
+            </tr>
+          <%end%>
+        <%end%>
+      </table>
+    </div>  
+  </div><hr>
+ <%end%>
