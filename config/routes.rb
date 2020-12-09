@@ -2,7 +2,6 @@ Rails.application.routes.draw do
 
   get("/", { :controller => "homepage", :action => "homepage" })
 
-
   # Routes for the Event request resource:
 
   # CREATE
