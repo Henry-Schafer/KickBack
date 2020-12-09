@@ -1,3 +1,5 @@
+<% if session[:user_id] != nil %>
+
 <div>
   <div>
     <h1>
@@ -5,53 +7,8 @@
     </h1>
   </div>
 </div>
-
 <hr>
-<!--
-<div>
-  <div>
-    <h2>
-      Add a new event request
-    </h2>
 
-    <form action="/insert_event_request" method="post">
-      <div>
-        <label for="status_box">
-          Status
-        </label>
-
-        <input type="text" id="status_box" name="query_status">
-      </div>
-
-      <div>
-        <label for="sender_id_box">
-          Sender
-        </label>
-
-        <input type="text" id="sender_id_box" name="query_sender_id">
-      </div>
-
-      <div>
-        <label for="owner_id_box">
-          Owner
-        </label>
-
-        <input type="text" id="owner_id_box" name="query_owner_id">
-      </div>
-
-      <button>
-        Create event request
-      </button>
-    </form>
-  </div>
-</div>
--->
-
-
-
-
-<% if session[:user_id] != nil %>
-  
   <div>
     <div>
       <h1>
@@ -59,67 +16,62 @@
       </h1>
     </div>
   </div>
-
   <hr>
   <hr>
-
   <div>
     <div>
       <table>
-        <tr>
+          <tr>
           <th>
-            Event
+            Event 
           </th>
           <th>
-            Date
+            Status
           </th>
           <th>
-            Joined
+            Sender
           </th>
           <th>
-          Details
-        </th>
+            Owner
+          </th>
+          <th>
+            Details
+          </th>
           <th>
           </th>
         </tr>
-        
         <% @list_of_event_requests.each do |an_event_request| %>
-           <% if an_event_request.owner_id == @current_user.id %>        
-           <tr>
-        <td>
-          <%= Event.where(:creator_id => an_event_request.owner_id).at(0).event_name %>
-        </td>
-
-        <td>
-          <%if an_event_request.status %>
-            Pending
-            <%else%>
-            Accepted
+          <% if an_event_request.owner_id == @current_user.id %>
+            <tr>
+              <td>
+                <a href="/events/<%= Event.where(:creator_id => an_event_request.owner_id).at(0).id %>">
+                  <%= Event.where(:creator_id => an_event_request.owner_id).at(0).event_name %>
+                </a>        </td>
+              <td>
+                <%if an_event_request.status %>
+                  Pending
+                <%else%>
+                  Accepted
+                <%end%>
+              </td>
+              <td>
+                <%= User.where(:id => an_event_request.sender_id).at(0).username  %>
+              </td>
+              <td>
+                <%= User.where(:id => an_event_request.owner_id).at(0).username %>
+              </td>
+              <td>
+                <a href="/events/<%= Event.where(:creator_id => an_event_request.owner_id).at(0).id %>">
+                  Show details
+                </a>
+              </td>
+            </tr>
           <%end%>
-        </td>
-
-        <td>
-          <%= User.where(:id => an_event_request.sender_id).at(0).username  %>
-        </td>
-
-        <td>
-          <%= User.where(:id => an_event_request.owner_id).at(0).username %>
-        </td>
-
-        <td>
-          <a href="/events/<%= Event.where(:creator_id => an_event_request.owner_id).at(0).id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-           <%end%>
         <% end %>
       </table>
     </div>
   </div>
-
   <hr>
-
   <div>
     <div>
       <h1>
@@ -130,69 +82,53 @@
   <hr>
   <hr>
   <hr>
-<div>
   <div>
-    <table>
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Status
-        </th>
-
-        <th>
-          Sender
-        </th>
-
-        <th>
-          Owner
-        </th>
-
-         <th>
-          Details
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @list_of_event_requests.each do |an_event_request| %>
-      <% if an_event_request.owner_id != @current_user.id %>
-      <tr>
-        <td>
-          <%= Event.where(:creator_id => an_event_request.owner_id).at(0).event_name %>
-        </td>
-
-        <td>
-          <%if an_event_request.status %>
-            Pending
-            <%else%>
-            Accepted
-          <%end%>
-        </td>
-
-        <td>
-          <%= User.where(:id => an_event_request.sender_id).at(0).username  %>
-        </td>
-
-        <td>
-          <%= User.where(:id => an_event_request.owner_id).at(0).username %>
-        </td>
-
-        <td>
-          <a href="/events/<%= Event.where(:creator_id => an_event_request.owner_id).at(0).id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-      <% end %>
-    </table>
+    <div>
+      <table>
+        <tr>
+          <th>
+            Event
+          </th>
+          <th>
+            Status
+          </th>
+          <th>
+            Sender
+          </th>
+          <th>
+            Owner
+          </th>
+          
+          <th>
+          </th>
+        </tr>
+        <% @list_of_event_requests.each do |an_event_request| %>
+          <% if an_event_request.owner_id != @current_user.id %>
+            <tr>
+              <td>
+                <a href="/events/<%= Event.where(:creator_id => an_event_request.owner_id).at(0).id %>">
+                  <%= Event.where(:creator_id => an_event_request.owner_id).at(0).event_name %>
+                </a>
+              </td>
+              <td>
+                <%if an_event_request.status %>
+                  Pending
+                <%else%>
+                  Accepted
+                <%end%>
+              </td>
+              <td>
+                <%= User.where(:id => an_event_request.sender_id).at(0).username  %>
+              </td>
+              <td>
+                <%= User.where(:id => an_event_request.owner_id).at(0).username %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </table>
+    </div>
   </div>
-</div>
-
-<hr>
-<hr>
- <%end%>
+  <hr>
+  <hr>
+<%end%>
