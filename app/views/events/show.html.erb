@@ -7,10 +7,18 @@
       <% matching_my_events = MyEvent.where({ :user_id => @current_user.id }).where({ :event_id => @the_event.id }) %>
       <% the_my_event = matching_my_events.at(0) %>
       <% if the_my_event == nil %>
-        <form action="/insert_my_event" method="post">
-          <input type="hidden" name="query_event_id" value="<%= @the_event.id %>">
-          <button>Join this event</button>
-        </form>
+         <%if @the_event.public_status %>
+            <form action="/insert_event_request" method="post">
+            <input type="hidden" name="query_event_id" value="<%= @the_event.id %>">
+            <button>Request to join this event</button>
+            </form>
+            
+          <%else%>
+            <form action="/insert_my_event" method="post">
+              <input type="hidden" name="query_event_id" value="<%= @the_event.id %>">
+              <button>Join this event</button>
+             </form>
+          <%end%>
       <% else %>
         <% if @the_event.creator_id != @current_user.id %>
           <a href="/delete_my_event/<%= the_my_event.id %>">
@@ -41,10 +49,15 @@
         <%= @the_event.details %>
       </dd>
       <dt>
-        Public status
+        Party type
+  
       </dt>
       <dd>
-        <%= @the_event.public_status %>
+        <%if @the_event.public_status %>
+            Private 
+          <%else%>
+            Public 
+          <%end%>
       </dd>
       <dt>
         Event name

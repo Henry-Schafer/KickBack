@@ -18,10 +18,12 @@ class EventRequestsController < ApplicationController
   end
 
   def create
+    events = Event.all
     the_event_request = EventRequest.new
-    the_event_request.status = params.fetch("query_status")
-    the_event_request.sender_id = params.fetch("query_sender_id")
-    the_event_request.owner_id = params.fetch("query_owner_id")
+    the_event_id = params.fetch("query_event_id")
+    the_event_request.status = Event.where(:id => the_event_id).at(0).public_status
+    the_event_request.sender_id = @current_user.id
+    the_event_request.owner_id = Event.where(:id => the_event_id).at(0).creator_id
 
     if the_event_request.valid?
       the_event_request.save
