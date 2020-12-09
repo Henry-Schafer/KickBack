@@ -35,7 +35,7 @@
             Owner
           </th>
           <th>
-            Details
+            Accept
           </th>
           <th>
           </th>
@@ -60,11 +60,16 @@
               <td>
                 <%= User.where(:id => an_event_request.owner_id).at(0).username %>
               </td>
+              
               <td>
-                <a href="/events/<%= Event.where(:creator_id => an_event_request.owner_id).at(0).id %>">
-                  Show details
-                </a>
-              </td>
+              <form action="/accept_request" method="post">
+                <input type="hidden" name="query_event_id" value="<%= Event.where(:creator_id => an_event_request.owner_id).at(0).id %>">
+                <input type="hidden" name="query_sender_id" value="<%= an_event_request.sender_id %>">
+                <button>Accept Request</button>
+             </form>
+
+            </td>
+
             </tr>
           <%end%>
         <% end %>
@@ -98,7 +103,9 @@
           <th>
             Owner
           </th>
-          
+          <th>
+          Cancel Request
+          </th>
           <th>
           </th>
         </tr>
@@ -122,6 +129,13 @@
               </td>
               <td>
                 <%= User.where(:id => an_event_request.owner_id).at(0).username %>
+              </td>
+
+              <td>
+              
+               <form action="/delete_event_request/<%= an_event_request.id %>" method="get">
+                <button>Cancel my Request</button>
+             </form>
               </td>
             </tr>
           <% end %>

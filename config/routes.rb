@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   # CREATE
   post("/insert_event_request", { :controller => "event_requests", :action => "create" })
-          
+       
   # READ
   get("/event_requests", { :controller => "event_requests", :action => "index" })
   
@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   #------------------------------
 
   # Routes for the My event resource:
+
+  #CREATE
+  post("/accept_request", { :controller => "my_events", :action => "accept" })
 
   # CREATE
   post("/insert_my_event", { :controller => "my_events", :action => "create" })
