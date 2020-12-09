@@ -43,10 +43,11 @@
         <% @list_of_event_requests.each do |an_event_request| %>
           <% if an_event_request.owner_id == @current_user.id %>
             <tr>
-              <td>
-                <a href="/events/<%= Event.where(:creator_id => an_event_request.owner_id).at(0).id %>">
-                  <%= Event.where(:creator_id => an_event_request.owner_id).at(0).event_name %>
-                </a>        </td>
+             <td>
+                <a href="/events/<%= an_event_request.the_event_id %>">
+                  <%= Event.where(:id => an_event_request.the_event_id).at(0).event_name %>
+                </a>        
+              </td>
               <td>
                 <%if an_event_request.status %>
                   Pending
@@ -113,9 +114,9 @@
           <% if an_event_request.sender_id == @current_user.id %>
             <tr>
               <td>
-                <a href="/events/<%= Event.where(:creator_id => an_event_request.owner_id).at(0).id %>">
-                  <%= Event.where(:creator_id => an_event_request.owner_id).at(0).event_name %>
-                </a>
+                <a href="/events/<%= an_event_request.the_event_id %>">
+                  <%= Event.where(:id => an_event_request.the_event_id).at(0).event_name %>
+                </a>        
               </td>
               <td>
                 <%if an_event_request.status %>

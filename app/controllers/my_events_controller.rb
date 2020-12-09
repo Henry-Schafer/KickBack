@@ -25,7 +25,7 @@ class MyEventsController < ApplicationController
     the_my_event = MyEvent.new
     the_my_event.user_id = @current_user.id # session[:user_id]
     the_my_event.event_id = params.fetch("query_event_id")
-
+    
     if the_my_event.valid?
       the_my_event.save
       redirect_to("/my_events", { :notice => "My event created successfully." })
@@ -62,7 +62,7 @@ class MyEventsController < ApplicationController
     the_my_event = MyEvent.new
     the_my_event.user_id = params.fetch("query_sender_id")
     the_my_event.event_id = params.fetch("query_event_id")
-
+    
     if the_my_event.valid?
       the_my_event.save
       EventRequest.where(:sender_id => the_my_event.user_id ).at(0).destroy

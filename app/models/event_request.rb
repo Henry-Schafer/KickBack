@@ -2,12 +2,13 @@
 #
 # Table name: event_requests
 #
-#  id         :integer          not null, primary key
-#  status     :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  owner_id   :integer
-#  sender_id  :integer
+#  id           :integer          not null, primary key
+#  status       :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  owner_id     :integer
+#  sender_id    :integer
+#  the_event_id :integer
 #
 class EventRequest < ApplicationRecord
   belongs_to(:sender, { :required => false, :class_name => "User", :foreign_key => "sender_id" })

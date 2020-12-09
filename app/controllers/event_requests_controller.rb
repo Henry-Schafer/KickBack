@@ -24,6 +24,7 @@ class EventRequestsController < ApplicationController
     the_event_request.status = Event.where(:id => the_event_id).at(0).public_status
     the_event_request.sender_id = @current_user.id
     the_event_request.owner_id = Event.where(:id => the_event_id).at(0).creator_id
+    the_event_request.the_event_id = the_event_id
 
     if the_event_request.valid?
       the_event_request.save
