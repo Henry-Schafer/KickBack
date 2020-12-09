@@ -1,24 +1,34 @@
 <div>
   <div>
     <h1>
-      Event #<%= @the_event.id %> details
+      <%= @the_event.event_name.capitalize %> details
     </h1>
+
     <% if session[:user_id] != nil %>
       <% matching_my_events = MyEvent.where({ :user_id => @current_user.id }).where({ :event_id => @the_event.id }) %>
       <% the_my_event = matching_my_events.at(0) %>
       <% if the_my_event == nil %>
-         <%if @the_event.public_status %>
-            <form action="/insert_event_request" method="post">
-            <input type="hidden" name="query_event_id" value="<%= @the_event.id %>">
-            <button>Request to join this event</button>
-            </form>
+
+          <% matching_my_requests = EventRequest.where({ :sender_id => @current_user.id }).where({:owner_id => @the_event.creator_id}) %>
+          <% my_request = matching_my_requests.at(0) %>
+          <% if my_request == nil %>
+            <%if @the_event.public_status %>
+                <form action="/insert_event_request" method="post">
+                <input type="hidden" name="query_event_id" value="<%= @the_event.id %>">
+                <button>Request to join this event</button>
+                </form>
             
-          <%else%>
+            <%else%>
             <form action="/insert_my_event" method="post">
               <input type="hidden" name="query_event_id" value="<%= @the_event.id %>">
               <button>Join this event</button>
              </form>
+            <%end%>
+          <%else%>
+            Request Pending
           <%end%>
+        
+          
       <% else %>
         <% if @the_event.creator_id != @current_user.id %>
           <a href="/delete_my_event/<%= the_my_event.id %>">

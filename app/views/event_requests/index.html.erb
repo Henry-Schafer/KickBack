@@ -110,7 +110,7 @@
           </th>
         </tr>
         <% @list_of_event_requests.each do |an_event_request| %>
-          <% if an_event_request.owner_id != @current_user.id %>
+          <% if an_event_request.sender_id == @current_user.id %>
             <tr>
               <td>
                 <a href="/events/<%= Event.where(:creator_id => an_event_request.owner_id).at(0).id %>">

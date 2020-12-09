@@ -12,24 +12,25 @@
   <div>
     <table>
       <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Details
-        </th>
-
-        <th>
-          Party Type
-        </th>
 
         <th>
           Event name
         </th>
+        <th>
+        </th>
+         <th>
+          Details
+        </th>
 
         <th>
           Host
+        </th>
+
+        
+       
+
+        <th>
+          Party Type
         </th>
 
         <th>
@@ -37,20 +38,33 @@
         </th>
 
 
-        <th>
-        </th>
+       
       </tr>
 
       <% @list_of_events.each do |an_event| %>
       <tr>
+
         <td>
-          <%= an_event.id %>
+          <%= an_event.event_name.capitalize %>
         </td>
 
+        <td>
+        - - - 
+        </td>
 
         <td>
         <%= an_event.details %>
         </td>
+
+       
+
+        <td>
+          <%= User.where({ :id => an_event.creator_id }).at(0).username %>
+        </td>
+
+        
+
+      
 <!--
         <td>
           <%if an_event.public_status%>
@@ -68,13 +82,10 @@
           <%end%>
         </td>
 
-        <td>
-          <%= an_event.event_name %>
-        </td>
+        
 
-        <td>
-          <%= User.where({ :id => an_event.creator_id }).at(0).username %>
-        </td>
+
+
 
         <!--
           <%if an_event.public_status%>
@@ -100,7 +111,7 @@
 
         <td>
           <a href="/events/<%= an_event.id %>">
-            Show details
+            More details
           </a>
         </td>
       </tr>

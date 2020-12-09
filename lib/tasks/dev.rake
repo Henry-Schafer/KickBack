@@ -21,7 +21,7 @@ bool = [true, false]
 
  50.times do |count|
     event = Event.new
-    event.event_name = Faker::Team.sport 
+    event.event_name = Faker::Team.sport
     event.details = Faker::Address.community 
     event.public_status = bool.sample
     event.event_date = Faker::Date.forward(days: 23)
@@ -38,5 +38,21 @@ bool = [true, false]
     my_event.save 
  end
 
+=begin
+events.each do |event|
+    my_event_request = EventRequest.new
+    my_event_request.owner_id = users.sample.id
+    my_event_request.sender_id = users.sample.id
+    my_event_request.status = true
+
+    matching_my_requests = EventRequest.where({ :sender_id => my_event_request.sender_id })
+    my_request = matching_my_requests.at(0)
+      if my_request == nil
+        if my_event_request.owner_id != my_event_request.sender_id
+          my_event_request.save 
+        end
+    end
+end
+=end
 
 end
