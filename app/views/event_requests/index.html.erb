@@ -64,7 +64,7 @@
               
               <td>
               <form action="/accept_request" method="post">
-                <input type="hidden" name="query_event_id" value="<%= Event.where(:creator_id => an_event_request.owner_id).at(0).id %>">
+                <input type="hidden" name="query_event_id" value="<%= an_event_request.the_event_id %>">
                 <input type="hidden" name="query_sender_id" value="<%= an_event_request.sender_id %>">
                 <button>Accept Request</button>
              </form>
